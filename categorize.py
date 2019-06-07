@@ -1,11 +1,14 @@
 import json
 import pathlib
 
-file = pathlib.Path('all_the_news_vector.txt')
+univlist_path = input("input the path of univlist")
+vector_path = input("input the path of vector file ")
+
+file = pathlib.Path(vector_path)
 file_text = file.read_text(encoding='utf-8')
 univ_data = json.loads(file_text)
 
-file = pathlib.Path('corpus/univlist.json')
+file = pathlib.Path(univlist_path)
 file_text = file.read_text(encoding='utf-8')
 univ_list = json.loads(file_text)
 
@@ -37,5 +40,11 @@ for univ in univ_data:
         if count % 100 == 0:
             print(count)
 
-with open('all_the_news_preprocessed.txt', 'w', encoding='UTF-8') as f:
+temp_txt_list = vector_path.split("_")[0:-1]
+output_txt_name = "_".join(temp_txt_list) + "_preprocessed.txt"
+
+
+
+
+with open(output_txt_name, 'w', encoding='UTF-8') as f:
     f.write(json.dumps(preprocessed_list))

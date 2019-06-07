@@ -21,8 +21,9 @@ empath_dict = {}
 for attribute in empath_attributes:
     index = empath_attributes.index(attribute)
     empath_dict[str(index)] = attribute
+path = input("input the path of preprocessed data")
 
-file = pathlib.Path('all_the_news_preprocessed.txt')
+file = pathlib.Path(path)
 file_text = file.read_text(encoding='utf-8')
 json_data = json.loads(file_text)
 

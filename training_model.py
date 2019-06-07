@@ -16,7 +16,7 @@ import matplotlib.pyplot as plt
 from sklearn.preprocessing import label_binarize
 from itertools import cycle
 
-path = 'all_the_news_preprocessed.txt'
+path = input("input the path of preprocessed data")
 web_hose = pd.read_json(path)
 print(web_hose.shape)
 

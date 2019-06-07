@@ -12,6 +12,10 @@ import re
 import numpy as np
 from empath import Empath
 
+
+json_path = input("input the path of json data")
+idf_path = input("input the path of idf file ")
+
 stop_words = stopwords.words('english')
 stop_words.extend(['from', 'subject', 're', 'edu', 'use'])
 
@@ -19,7 +23,7 @@ lexicon = Empath()
 
 ngram_list = []
 idf_dict = {}
-with open('all_the_news_idf.txt', 'r',  encoding='UTF-8') as f:
+with open(idf_path, 'r',  encoding='UTF-8') as f:
     lines = f.readlines()
     for line in lines:
         ngram_list.append(line.split(':')[0])
@@ -116,7 +120,7 @@ def vectorize(content_dictionary, article_len):
     return normalize_ngram_vectors(np.array(vector_list))
 
 
-file = pathlib.Path('corpus/all-the-news.json')
+file = pathlib.Path(json_path)
 file_text = file.read_text(encoding='utf-8')
 json_data = json.loads(file_text)
 vector_list = []
@@ -139,8 +143,9 @@ for univ, univ_articles in json_data.items():
 print(articles_count)
 
 temp_count = 0
+output_txt_name = json_path.split["."][0].split("/")[1] + "_vector,txt"
 
-with open('all_the_news_vector.txt', 'w', encoding='UTF-8') as f:
+with open(output_txt_name, 'w', encoding='UTF-8') as f:
     univ_dict = {}
     f.write("{")
 

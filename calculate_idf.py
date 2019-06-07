@@ -11,9 +11,11 @@ from nltk.tokenize import word_tokenize
 import re
 import pathlib
 
+json_path = input("input the path of json data")
+top_500_path = input("input the path of top 500 ")
 ngram_list = []
 ngram_count_dict = {}
-with open('all_the_news_top_500.txt', 'r',  encoding='UTF-8') as f:
+with open(top_500_path, 'r',  encoding='UTF-8') as f:
     lines = f.readlines()
     for line in lines:
         ngram_list.append(line.split(':')[0])
@@ -89,7 +91,7 @@ def idf_value(dict_map,articles_len,word):
 def find_ngram_number(ngram):
     ngram.count(' ')
 
-file = pathlib.Path('corpus/all-the-news.json')
+file = pathlib.Path(json_path)
 file_text = file.read_text(encoding='utf-8')
 json_data = json.loads(file_text)
 articles = []
@@ -102,7 +104,9 @@ article_len = len(articles)
 
 count = 0
 
-with open('all_the_news_idf.txt', 'w', encoding='UTF-8') as f:
+output_txt_name = json_path.split["."][0].split("/")[1] + "idf,txt"
+
+with open(output_txt_name, 'w', encoding='UTF-8') as f:
     for article in articles:
         article_map = wordgram_analyze(article)
         for ngram in ngram_list:

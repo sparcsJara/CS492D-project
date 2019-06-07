@@ -101,7 +101,9 @@ def tfidf_analysis(dict_tf, dict_idf):
     return OrderedDict(sorted(tf_idf_dict.items(),key=_operator.itemgetter(1),reverse=True))
 
 
-path = "corpus/all-the-news.json"
+
+
+path = input("input the path of json data")
 file = pathlib.Path(path)
 file_text = file.read_text(encoding='utf-8')
 json_data = json.loads(file_text)
@@ -121,16 +123,15 @@ for article in articles:
     result_dict = result_dict.most_common(10000)
     result_dict = dict(result_dict)
     result_dict = Counter(result_dict)
-
     count += 1
-    if count % 100 ==0:
+    if count % 100 == 0:
         print(count)
-        '' \
-        ''
+
 frequency_dict = OrderedDict(result_dict)
 frequency_ordered_dict = OrderedDict(sorted(frequency_dict.items(), key=_operator.itemgetter(1), reverse=True))
 top_500 = list(frequency_ordered_dict.items())[0:500]
-with open('all_the_news_top_500.txt', 'w',  encoding='UTF-8') as f:
+output_txt_name = path.split["."][0].split("/")[1] + "_top_500,txt"
+with open(output_txt_name, 'w', encoding='UTF-8') as f:
     for item in top_500:
         str_sentence = ""
         str_sentence = (' '.join(item[0])) + ":" + str(item[1])
